@@ -1,4 +1,4 @@
-defmodule ElixirAoc2020.MixProject do
+defmodule AdventOfCode.MixProject do
   use Mix.Project
 
   def project do

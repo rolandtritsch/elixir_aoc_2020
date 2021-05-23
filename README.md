@@ -1,6 +1,10 @@
-# ElixirAoc2020
+# Elixir Advent of Code 2020
 
-**TODO: Add description**
+https://adventofcode.com/
+
+```shell
+mix test
+```
 
 ## Installation
 
