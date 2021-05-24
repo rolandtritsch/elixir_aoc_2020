@@ -9,7 +9,7 @@ defmodule AdventOfCode.DayOne.PartTwo do
   end
 
   def run do
-    case File.read("./input.txt") do
+    case File.read("./input/day_one.txt") do
       {:ok, contents} -> process(contents)
       {:error, reason} -> IO.puts("Error: #{reason}")
     end
@@ -24,6 +24,6 @@ defmodule AdventOfCode.DayOne.PartTwo do
     end)
     |> calc()
     |> Enum.uniq()
-    |> List.first
+    |> List.first()
   end
 end

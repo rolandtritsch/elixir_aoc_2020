@@ -1,9 +1,14 @@
 defmodule AdventOfCodeTest do
   use ExUnit.Case
-  alias AdventOfCode.DayOne.{PartOne, PartTwo}
+  alias AdventOfCode.DayOne
+  alias AdventOfCode.DayTwo
 
-  test "day1, part 1" do
-    assert PartOne.run() == 969024
-    assert PartTwo.run() == 230057040
+  test "day 1, part 1 & 2" do
+    assert DayOne.PartOne.run() == 969_024
+    assert DayOne.PartTwo.run() == 230_057_040
+  end
+
+  test "day 2, part 1" do
+    assert DayTwo.PartOne.run() == 625
   end
 end
