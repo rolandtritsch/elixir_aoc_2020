@@ -10,5 +10,6 @@ defmodule AdventOfCodeTest do
 
   test "day 2, part 1" do
     assert DayTwo.PartOne.run() == 625
+    assert DayTwo.PartTwo.run() == 391
   end
 end
