@@ -1,6 +1,6 @@
-defmodule AdventOfCode.DayTwo.PartOne do
+defmodule AdventOfCode.Day2.Part2 do
   def run do
-    case File.read("./input/day_two.txt") do
+    case File.read("./input/day_02.txt") do
       {:ok, contents} -> process(contents)
       {:error, reason} -> IO.puts("Error: #{reason}")
     end
@@ -22,15 +22,10 @@ defmodule AdventOfCode.DayTwo.PartOne do
 
     [char, _] = String.split(char, ":")
 
-    check = count_chars(pass, char)
+    char_list = String.graphemes(pass)
+    first_match = char == Enum.at(char_list, min - 1)
+    second_match = char == Enum.at(char_list, max - 1)
 
-    check >= min and check <= max
-  end
-
-  defp count_chars(password, char) do
-    password
-    |> String.graphemes()
-    |> Enum.filter(&(&1 == char))
-    |> Enum.count()
+    (first_match and !second_match) or (!first_match and second_match)
   end
 end

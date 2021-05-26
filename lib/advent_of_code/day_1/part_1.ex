@@ -1,15 +1,14 @@
-defmodule AdventOfCode.DayOne.PartTwo do
+defmodule AdventOfCode.Day1.Part1 do
   def calc(nums) do
     for x <- nums,
         y <- nums,
-        z <- nums,
-        x + y + z == 2020 do
-      x * y * z
+        x + y == 2020 do
+      x * y
     end
   end
 
   def run do
-    case File.read("./input/day_one.txt") do
+    case File.read("./input/day_01.txt") do
       {:ok, contents} -> process(contents)
       {:error, reason} -> IO.puts("Error: #{reason}")
     end

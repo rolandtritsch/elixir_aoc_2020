@@ -1,3 +1,4 @@
 defmodule AdventOfCode do
-  defdelegate run, to: AdventOfCode.DayOne.PartOne
+  defdelegate run, to: AdventOfCode.Day1.Part1
 end
+
