@@ -1,4 +1,27 @@
 defmodule AdventOfCode.Day1.Part2 do
+  def calc2(nums) do
+    [w, x, y | rest] = nums
+
+    pairs1 =
+      rest
+      |> Enum.map(fn y -> {w, x, y} end)
+
+    pairs2 =
+      rest
+      |> Enum.map(fn z -> {x, y, z} end)
+
+    pair = pairs1 ++ pairs2
+      |> Enum.find(fn {x, y, z} -> x + y + z == 2020 end)
+
+    case is_tuple(pair) do
+      true -> multiply(pair)
+      _ -> nil
+    end
+  end
+
+  defp multiply({x, y}), do: x * y
+  defp multiply({x, y, z}), do: x * y * z
+
   def calc(nums) do
     for x <- nums,
         y <- nums,
