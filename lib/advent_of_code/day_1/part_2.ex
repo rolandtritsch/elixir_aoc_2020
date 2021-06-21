@@ -10,7 +10,8 @@ defmodule AdventOfCode.Day1.Part2 do
       rest
       |> Enum.map(fn z -> {x, y, z} end)
 
-    pair = pairs1 ++ pairs2
+    pair =
+      (pairs1 ++ pairs2)
       |> Enum.find(fn {x, y, z} -> x + y + z == 2020 end)
 
     case is_tuple(pair) do
