@@ -16,68 +16,12 @@ defmodule AdventOfCodeTest do
     assert Day2.Part2.run() == 391
   end
 
-  test "day 3, part 1" do
-    assert AdventOfCode.Day3.Part1.forest("..##.......\n.#") == [{0, 2}, {0, 3}, {1, 1}]
-    assert AdventOfCode.Day3.Part1.forest(test_forest_input()) == test_tree_coordinates()
-    #    AdventOfCode.Day3.Part1.run(test_forest_input(), {3, 1}) |> IO.inspect(label: ">>>")
-    assert AdventOfCode.Day3.Part1.run(test_forest_input(), {3, 1}) == 7
-  end
-
-  defp test_forest_input do
-    """
-    ..##.......
-    #...#...#..
-    .#....#..#.
-    ..#.#...#.#
-    .#...##..#.
-    ..#.##.....
-    .#.#.#....#
-    .#........#
-    #.##...#...
-    #...##....#
-    .#..#...#.#
-    """
-  end
-
-  defp test_tree_coordinates do
-    [
-      {0, 2},
-      {0, 3},
-      {1, 0},
-      {1, 4},
-      {1, 8},
-      {2, 1},
-      {2, 6},
-      {2, 9},
-      {3, 2},
-      {3, 4},
-      {3, 8},
-      {3, 10},
-      {4, 1},
-      {4, 5},
-      {4, 6},
-      {4, 9},
-      {5, 2},
-      {5, 4},
-      {5, 5},
-      {6, 1},
-      {6, 3},
-      {6, 5},
-      {6, 10},
-      {7, 1},
-      {7, 10},
-      {8, 0},
-      {8, 2},
-      {8, 3},
-      {8, 7},
-      {9, 0},
-      {9, 4},
-      {9, 5},
-      {9, 10},
-      {10, 1},
-      {10, 4},
-      {10, 8},
-      {10, 10}
-    ]
+  test "day 3, part 1 & 2" do
+    assert AdventOfCode.Day3.Part1.run("./input/day_03.txt", {3, 1}) == 153
+    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {1, 1}) == 66
+    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {5, 1}) == 79
+    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {7, 1}) == 92
+    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {1, 2}) == 33
+    # 153 * 66 * 79 * 92 * 33 = 2421944712
   end
 end
