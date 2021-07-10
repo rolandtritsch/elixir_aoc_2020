@@ -18,10 +18,11 @@ defmodule AdventOfCodeTest do
 
   test "day 3, part 1 & 2" do
     assert AdventOfCode.Day3.Part1.run("./input/day_03.txt", {3, 1}) == 153
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {1, 1}) == 66
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {5, 1}) == 79
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {7, 1}) == 92
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", {1, 2}) == 33
-    # 153 * 66 * 79 * 92 * 33 = 2421944712
+
+    trees =
+      for slope <- [{3, 1}, {1, 1}, {5, 1}, {7, 1}, {1, 2}],
+          do: AdventOfCode.Day3.Part2.run("./input/day_03.txt", slope)
+
+    assert Enum.reduce(trees, fn t, acc -> t * acc end) == 2_421_944_712
   end
 end
