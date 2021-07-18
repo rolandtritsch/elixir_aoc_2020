@@ -1,16 +1,9 @@
 defmodule AdventOfCode.Day5 do
-  def parse_boarding_pass(boarding_pass) do
-    for << c <- boarding_pass >> do
-      IO.inspect(c)
-    end
-  end
-
-
-  def calc_id(row, column) do
-    row * 8 + column
-  end
-
-  def part1(input_file) do
-    input_file
+  def parse_file(path) do
+    path
+    |> File.stream!()
+    |> Stream.map(&String.split(&1, "\n", trim: true))
+    |> Enum.to_list()
+    |> List.flatten()
   end
 end

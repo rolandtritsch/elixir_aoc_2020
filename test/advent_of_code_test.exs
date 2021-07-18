@@ -92,9 +92,10 @@ defmodule AdventOfCodeTest do
 
   describe "day 5" do
     test "part 1, calculate seat ID" do
-      AdventOfCode.Day5.parse_boarding_pass("BFFFBBFRRR") == 567
-      AdventOfCode.Day5.parse_boarding_pass("FFFBBBFRRR") == 119
-      AdventOfCode.Day5.parse_boarding_pass("BBFFBBFRLL") == 820
+      assert AdventOfCode.Day5.Part1.parse_boarding_pass("BFFFBBFRRR") == 567
+      assert AdventOfCode.Day5.Part1.parse_boarding_pass("FFFBBBFRRR") == 119
+      assert AdventOfCode.Day5.Part1.parse_boarding_pass("BBFFBBFRLL") == 820
+#      AdventOfCode.Day5.Part1.run("./input/day_04.txt")
     end
   end
 end
