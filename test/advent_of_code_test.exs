@@ -95,7 +95,7 @@ defmodule AdventOfCodeTest do
       assert AdventOfCode.Day5.Part1.parse_boarding_pass("BFFFBBFRRR") == 567
       assert AdventOfCode.Day5.Part1.parse_boarding_pass("FFFBBBFRRR") == 119
       assert AdventOfCode.Day5.Part1.parse_boarding_pass("BBFFBBFRLL") == 820
-#      AdventOfCode.Day5.Part1.run("./input/day_04.txt")
+      assert AdventOfCode.Day5.Part1.run("./input/day_05.txt") == 953
     end
   end
 end

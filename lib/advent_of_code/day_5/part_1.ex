@@ -31,6 +31,6 @@ defmodule AdventOfCode.Day5.Part1 do
     input_file
     |> Day5.parse_file()
     |> Enum.map(&parse_boarding_pass/1)
-    |> IO.inspect()
+    |> Enum.max()
   end
 end
