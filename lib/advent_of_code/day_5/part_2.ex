@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day5.Part1 do
+defmodule AdventOfCode.Day5.Part2 do
   alias AdventOfCode.Day5
 
   def parse_boarding_pass(boarding_pass) do
@@ -20,9 +20,14 @@ defmodule AdventOfCode.Day5.Part1 do
   end
 
   def run(input_file) do
-    input_file
-    |> Day5.parse_file()
-    |> Enum.map(&parse_boarding_pass/1)
-    |> Enum.max()
+    seat_ids =
+      input_file
+      |> Day5.parse_file()
+      |> Enum.map(&parse_boarding_pass/1)
+
+    max = Enum.max(seat_ids)
+    min = Enum.min(seat_ids)
+
+    Enum.to_list(min..max)
   end
 end
