@@ -99,7 +99,7 @@ defmodule AdventOfCodeTest do
     end
 
     test "part 2, finds seat" do
-      assert AdventOfCode.Day5.Part2.run("./input/day_05.txt") == 953
+      assert AdventOfCode.Day5.Part2.run("./input/day_05.txt") == 615
     end
   end
 end

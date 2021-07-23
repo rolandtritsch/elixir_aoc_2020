@@ -25,9 +25,11 @@ defmodule AdventOfCode.Day5.Part2 do
       |> Day5.parse_file()
       |> Enum.map(&parse_boarding_pass/1)
 
-    max = Enum.max(seat_ids)
+    # calculate possible seat ids
     min = Enum.min(seat_ids)
+    max = Enum.max(seat_ids)
 
-    Enum.to_list(min..max)
+    # my seat id
+    Enum.to_list(min..max) -- seat_ids |> List.first
   end
 end
