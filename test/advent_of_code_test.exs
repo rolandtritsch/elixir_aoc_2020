@@ -102,4 +102,14 @@ defmodule AdventOfCodeTest do
       assert AdventOfCode.Day5.Part2.run("./input/day_05.txt") == 615
     end
   end
+
+  describe "day 6" do
+    test "part 1, sum yeses count by group" do
+      sample_groups = [["abc"], ["a", "b", "c"], ["ab", "ac"], ["a", "a", "a", "a"], ["b"]]
+
+      assert AdventOfCode.Day6.Part1.parse_group(sample_groups) == 11
+      assert AdventOfCode.Day6.Part1.parse_group([["jmqnkzlsfedaptx", "usjfkadqwmeyilph"]]) == 20
+      assert AdventOfCode.Day6.Part1.run("./input/day_06.txt") == 6437
+    end
+  end
 end

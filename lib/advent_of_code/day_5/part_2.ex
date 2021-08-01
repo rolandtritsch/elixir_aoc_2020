@@ -30,6 +30,6 @@ defmodule AdventOfCode.Day5.Part2 do
     max = Enum.max(seat_ids)
 
     # my seat id
-    Enum.to_list(min..max) -- seat_ids |> List.first
+    (Enum.to_list(min..max) -- seat_ids) |> List.first()
   end
 end
