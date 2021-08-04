@@ -4,7 +4,7 @@ defmodule AdventOfCode.Day6.Part1 do
   def parse_group(group) do
     group
     |> Stream.map(&Enum.join/1)
-    |> Stream.map(&String.split(&1, "", trim: true))
+    |> Stream.map(&String.graphemes/1)
     |> Stream.map(&Enum.frequencies/1)
     |> Stream.map(&map_size/1)
     |> Enum.sum()
