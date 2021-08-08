@@ -35,8 +35,8 @@ defmodule AdventOfCode.Day1.Part1 do
     |> List.first()
   end
 
-  def run do
-    case File.read("./input/day_01.txt") do
+  def run(file_path) do
+    case File.read(file_path) do
       {:ok, contents} -> process(contents)
       {:error, reason} -> IO.puts("Error: #{reason}")
     end

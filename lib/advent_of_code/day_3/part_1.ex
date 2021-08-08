@@ -1,12 +1,18 @@
 defmodule AdventOfCode.Day3.Part1 do
   # inspired by https://github.com/anamba/adventofcode2020/blob/main/lib/day3/part1.ex
-  def run(forest_input), do: run(forest_input, {3, 1})
 
-  def run(forest_input, slope) do
+  def run(forest_input, slope) when is_tuple(slope) do
     start = {0, 0}
     forest_map = parse_forest(forest_input)
     count_trees(forest_map, start, slope)
   end
+
+  def run(forest_input, slope) when is_list(slope) do
+    trees = for s <- slope, do: run(forest_input, s)
+    Enum.reduce(trees, fn t, acc -> t * acc end)
+  end
+
+  def run(forest_input), do: run(forest_input, {3, 1})
 
   def count_trees(map, current, slope, count \\ 0)
 

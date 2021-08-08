@@ -1,6 +1,6 @@
 defmodule AdventOfCode.Day2.Part1 do
-  def run do
-    case File.read("./input/day_02.txt") do
+  def run(file_path) do
+    case File.read(file_path) do
       {:ok, contents} -> process(contents)
       {:error, reason} -> IO.puts("Error: #{reason}")
     end
