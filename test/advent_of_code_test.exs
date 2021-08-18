@@ -116,4 +116,10 @@ defmodule AdventOfCodeTest do
       assert AdventOfCode.Day6.Part2.run("./input/day_06.txt") == 3229
     end
   end
+
+  describe "day 7" do
+    test "part 1" do
+      assert AdventOfCode.Day7.Part1.run("./input/day_07.txt", "dotted indigo") === false
+    end
+  end
 end

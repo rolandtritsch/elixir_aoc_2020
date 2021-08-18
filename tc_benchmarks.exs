@@ -4,7 +4,7 @@ defmodule Benchmarks do
     IO.puts("#{module}.#{fun} => {#{result}, #{time |> to_seconds() }s}")
   end
 
-  defp to_seconds(microseconds), do: microseconds / 1_000_000
+  defp to_seconds(ms), do: ms / 1_000_000
 end
 
 Benchmarks.timed(AdventOfCode.Day1.Part1, :run, ["./input/day_01.txt"])

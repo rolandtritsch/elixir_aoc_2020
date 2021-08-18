@@ -9,9 +9,11 @@ defmodule Custom.Formatter do
 
   defp format(suite) do
     Enum.map_join(suite.scenarios, "\n", fn scenario ->
-      "#{scenario.job_name}: #{scenario.run_time_data.statistics.average}"
+      "#{scenario.job_name}: #{scenario.run_time_data.statistics.average |> to_seconds() }"
     end)
   end
+
+  defp to_seconds(ms), do: ms / 1_000_000
 end
 
 Benchee.run(
