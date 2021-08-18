@@ -119,7 +119,7 @@ defmodule AdventOfCodeTest do
 
   describe "day 7" do
     test "part 1" do
-      assert AdventOfCode.Day7.Part1.run("./input/day_07.txt", "dotted indigo") === false
+      assert AdventOfCode.Day7.Part1.run("./input/day_07.txt", "shiny gold") === 257
     end
   end
 end
