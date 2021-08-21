@@ -1,27 +1,21 @@
-defmodule AdventOfCode.Day7.Part1 do
-  # credit: https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part1.ex
+defmodule AdventOfCode.Day7.Part2 do
+  # credit: https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part2.ex
 
-  def count_bags_that_contain_color(rules, target) do
-    rules
-    |> Map.keys()
-    |> MapSet.new()
-    |> Enum.count(fn bag -> contains?(bag, target, rules) end)
-  end
+  def count_bags_that_contain_color(rules, target, multiplayer \\ 1) do
+    case rules[target] do
+      nil ->
+        0
 
-  def contains?(bag, target, rules, acc \\ [])
+      [] ->
+          multiplayer
 
-  def contains?(bag, target, rules, acc) do
-    cond do
-      bag in acc ->
-        false
+      contents ->
 
-      Enum.any?(rules[bag], fn {color, _quantity} -> color == target end) ->
-        true
-
-      true ->
-        Enum.any?(rules[bag], fn {color, _quantity} ->
-          contains?(color, target, rules, [bag | acc])
-        end)
+        multiplayer +
+          (Enum.map(contents, fn {color, quantity} ->
+             multiplayer * count_bags_that_contain_color(rules, color, quantity)
+           end)
+           |> Enum.sum())
     end
   end
 
@@ -45,15 +39,17 @@ defmodule AdventOfCode.Day7.Part1 do
     %{"color" => color, "quantity" => quantity} =
       Regex.named_captures(~r/^(?<quantity>\d+) (?<color>\w+ \w+) bag(s?)(\.?)$/, contents)
 
-    {color, quantity}
+    {color, String.to_integer(quantity)}
   end
 
   def run(file_path, bag_color) do
-    file_path
+    count = file_path
     |> File.stream!()
     |> Stream.map(&String.trim/1)
     |> Stream.map(&parse_rule/1)
     |> Enum.into(%{})
     |> count_bags_that_contain_color(bag_color)
+
+    count - 1
   end
 end

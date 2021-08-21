@@ -9,8 +9,8 @@ mix test
 ## Benchmarks
 
 ```shell
-mix run average_benchmark.exs # runs benchmarks using Benchee
-mix run tc_benchmark.exs # runs benchmarks using :timer.tc/3
+mix run average_benchmarks.exs # runs benchmarks using Benchee
+mix run tc_benchmarks.exs # runs benchmarks using :timer.tc/3
 ```
 
 ## Installation

@@ -37,6 +37,7 @@ Benchee.run(
     "AdventOfCode.Day6.Part2.run/1" => fn -> AdventOfCode.Day6.Part2.run("./input/day_06.txt") end,
 
     "AdventOfCode.Day7.Part1.run/1" => fn -> AdventOfCode.Day7.Part1.run("./input/day_07.txt", "shiny gold") end,
+    "AdventOfCode.Day7.Part2.run/1" => fn -> AdventOfCode.Day7.Part2.run("./input/day_07.txt", "shiny gold") end,
 
   },
   formatters: [&Custom.Formatter.output/1],

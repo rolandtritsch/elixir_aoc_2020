@@ -26,5 +26,6 @@ Benchmarks.timed(AdventOfCode.Day6.Part1, :run, ["./input/day_06.txt"])
 Benchmarks.timed(AdventOfCode.Day6.Part2, :run, ["./input/day_06.txt"])
 
 Benchmarks.timed(AdventOfCode.Day7.Part1, :run, ["./input/day_07.txt", "shiny gold"])
+Benchmarks.timed(AdventOfCode.Day7.Part2, :run, ["./input/day_07.txt", "shiny gold"])
 
 
