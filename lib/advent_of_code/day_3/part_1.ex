@@ -1,29 +1,38 @@
 defmodule AdventOfCode.Day3.Part1 do
   # inspired by https://github.com/anamba/adventofcode2020/blob/main/lib/day3/part1.ex
-  def run(forest_input), do: run(forest_input, {3, 1})
+  def run(input), do: run(input, {3, 1})
 
-  def run(forest_input, slope) do
+  def run(input, slope) do
     start = {0, 0}
-    forest_map = parse_forest(forest_input)
-    count_trees(forest_map, start, slope)
+    forest = parse_forest(input)
+    count_trees(forest, start, slope)
   end
 
-  def count_trees(map, current, slope, count \\ 0)
+  def count_trees(forest, current, slope, count \\ 0)
 
-  def count_trees({_map, _width, height}, {_currentX, currentY}, _, count) when currentY > height,
-    do: count
+  def count_trees(
+    {_forest_map, _forest_width, forest_height},
+    {_current_col, current_row},
+    _slope,
+    count
+  ) when current_row > forest_height do
+    count
+  end
 
-  def count_trees({map, width, height}, {x1, y1}, {x2, y2} = slope, count) do
-    {new_x, new_y} = next_coords = {x1 + x2, y1 + y2}
-    {map_x, map_y} = {rem(new_x, width), new_y}
+  def count_trees(
+    {forest_map, forest_width, _forest_height} = forest,
+    {current_col, current_row},
+    {delta_col, delta_row} = slope,
+    count
+  ) do
+    next_current = {rem(current_col + delta_col, forest_width), current_row + delta_row}
+    next_count = count + tree_count(forest_map, next_current)
 
-    tree =
-      case get_in(map, [map_y, map_x]) do
-        "#" -> 1
-        _ -> 0
-      end
+    count_trees(forest, next_current, slope, next_count)
+  end
 
-    count_trees({map, width, height}, next_coords, slope, count + tree)
+  defp tree_count(map, {col, row}) do
+    if get_in(map, [row, col]) == "#", do: 1, else: 0
   end
 
   defp parse_forest(file_path) do
