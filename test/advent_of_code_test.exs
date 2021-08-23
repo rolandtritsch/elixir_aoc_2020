@@ -134,4 +134,10 @@ defmodule AdventOfCodeTest do
       assert AdventOfCode.Day7.Part2.run("./input/day_07.txt", "shiny gold") == 1038
     end
   end
+
+  describe "day 8" do
+    assert AdventOfCode.Day8.Part1.parse_instruction("nop +0") == {"nop", "+", 0}
+    assert AdventOfCode.Day8.Part1.parse_instruction("jmp -3") == {"jmp", "-", 3}
+    assert AdventOfCode.Day8.Part1.run("./input/day_08_test.txt") == 5
+  end
 end

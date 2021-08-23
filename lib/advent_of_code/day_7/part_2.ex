@@ -7,10 +7,9 @@ defmodule AdventOfCode.Day7.Part2 do
         0
 
       [] ->
-          multiplayer
+        multiplayer
 
       contents ->
-
         multiplayer +
           (Enum.map(contents, fn {color, quantity} ->
              multiplayer * count_bags_that_contain_color(rules, color, quantity)
@@ -43,12 +42,13 @@ defmodule AdventOfCode.Day7.Part2 do
   end
 
   def run(file_path, bag_color) do
-    count = file_path
-    |> File.stream!()
-    |> Stream.map(&String.trim/1)
-    |> Stream.map(&parse_rule/1)
-    |> Enum.into(%{})
-    |> count_bags_that_contain_color(bag_color)
+    count =
+      file_path
+      |> File.stream!()
+      |> Stream.map(&String.trim/1)
+      |> Stream.map(&parse_rule/1)
+      |> Enum.into(%{})
+      |> count_bags_that_contain_color(bag_color)
 
     count - 1
   end
