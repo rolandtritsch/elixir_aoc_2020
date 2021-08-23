@@ -1,5 +1,5 @@
 defmodule AdventOfCode.Day7.Part1 do
-  # credit: https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part1.ex
+  # inspired by https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part1.ex
 
   def count_bags_that_contain_color(rules, target) do
     rules
@@ -12,16 +12,13 @@ defmodule AdventOfCode.Day7.Part1 do
 
   def contains?(bag, target, rules, acc) do
     cond do
-      bag in acc ->
-        false
+      bag in acc -> false
 
-      Enum.any?(rules[bag], fn {color, _quantity} -> color == target end) ->
-        true
+      Enum.any?(rules[bag], fn {color, _quantity} -> color == target end) -> true
 
-      true ->
-        Enum.any?(rules[bag], fn {color, _quantity} ->
-          contains?(color, target, rules, [bag | acc])
-        end)
+      true -> Enum.any?(rules[bag], fn {color, _quantity} ->
+         contains?(color, target, rules, [bag | acc])
+      end)
     end
   end
 
@@ -40,12 +37,11 @@ defmodule AdventOfCode.Day7.Part1 do
   end
 
   def parse_quantity("no other bags."), do: nil
-
   def parse_quantity(contents) do
     %{"color" => color, "quantity" => quantity} =
       Regex.named_captures(~r/^(?<quantity>\d+) (?<color>\w+ \w+) bag(s?)(\.?)$/, contents)
 
-    {color, quantity}
+    {color, String.to_integer(quantity)}
   end
 
   def run(file_path, bag_color) do

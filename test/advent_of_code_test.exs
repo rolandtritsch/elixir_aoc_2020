@@ -16,14 +16,7 @@ defmodule AdventOfCodeTest do
 
   test "day 3, part 1 & 2" do
     assert AdventOfCode.Day3.Part1.run("./input/day_03.txt", {3, 1}) == 153
-
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", [
-             {3, 1},
-             {1, 1},
-             {5, 1},
-             {7, 1},
-             {1, 2}
-           ]) == 2_421_944_712
+    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", [{3, 1}, {1, 1}, {5, 1}, {7, 1}, {1, 2}]) == 2_421_944_712
   end
 
   describe "day 4, part 1" do
@@ -126,18 +119,15 @@ defmodule AdventOfCodeTest do
 
   describe "day 7" do
     test "part 1" do
-      assert AdventOfCode.Day7.Part1.run("./input/day_07.txt", "shiny gold") == 257
+      assert AdventOfCode.Day7.Part1.run("./input/day_07test.txt", "shiny gold") === 4
+      assert AdventOfCode.Day7.Part1.run("./input/day_07.txt", "shiny gold") === 278
     end
-
+    
     test "part 2" do
-      assert AdventOfCode.Day7.Part2.run("./input/day_07_test.txt", "shiny gold") == 126
-      assert AdventOfCode.Day7.Part2.run("./input/day_07.txt", "shiny gold") == 1038
+      assert AdventOfCode.Day7.Part2.run("./input/day_07test.txt", "dark olive") === 7 
+      assert AdventOfCode.Day7.Part2.run("./input/day_07test.txt", "shiny gold") === 32 
+      assert AdventOfCode.Day7.Part2.run("./input/day_07test2.txt", "shiny gold") === 126 
+      assert AdventOfCode.Day7.Part2.run("./input/day_07.txt", "shiny gold") === 45157 
     end
-  end
-
-  describe "day 8" do
-    assert AdventOfCode.Day8.Part1.parse_instruction("nop +0") == {"nop", "+", 0}
-    assert AdventOfCode.Day8.Part1.parse_instruction("jmp -3") == {"jmp", "-", 3}
-    assert AdventOfCode.Day8.Part1.run("./input/day_08_test.txt") == 5
   end
 end
