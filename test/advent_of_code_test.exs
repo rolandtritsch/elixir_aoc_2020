@@ -136,9 +136,16 @@ defmodule AdventOfCodeTest do
   end
 
   describe "day 8" do
-    assert AdventOfCode.Day8.Part1.parse_instruction("nop +0") == {"nop", "+", 0}
-    assert AdventOfCode.Day8.Part1.parse_instruction("jmp -3") == {"jmp", "-", 3}
-    assert AdventOfCode.Day8.Part1.run("./input/day_08_test.txt") == 5
-    assert AdventOfCode.Day8.Part1.run("./input/day_08.txt") == 5
+    test "part 1" do
+      assert AdventOfCode.Day8.Part1.parse("nop +0") == {"nop", "+", 0}
+      assert AdventOfCode.Day8.Part1.parse("jmp -3") == {"jmp", "-", 3}
+      assert AdventOfCode.Day8.Part1.run("./input/day_08_test.txt") == 5
+      assert AdventOfCode.Day8.Part1.run("./input/day_08.txt") == 1521
+    end
+
+    test "part 2" do
+      assert AdventOfCode.Day8.Part2.run("./input/day_08_test.txt") == 8
+#      assert AdventOfCode.Day8.Part2.run("./input/day_08.txt") == 8
+    end
   end
 end
