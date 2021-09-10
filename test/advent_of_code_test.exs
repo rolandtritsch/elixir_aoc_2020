@@ -145,7 +145,7 @@ defmodule AdventOfCodeTest do
 
     test "part 2" do
       assert AdventOfCode.Day8.Part2.run("./input/day_08_test.txt") == 8
-#      assert AdventOfCode.Day8.Part2.run("./input/day_08.txt") == 8
+      #      assert AdventOfCode.Day8.Part2.run("./input/day_08.txt") == 8
     end
   end
 end
