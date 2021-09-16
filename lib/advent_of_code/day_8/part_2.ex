@@ -5,9 +5,9 @@ defmodule AdventOfCode.Day8.Part2 do
     program
     |> Enum.map(fn {k, line} ->
       case line do
-
         {"jmp", _, _} ->
           put_elem(line, 0, "nop")
+
         {"jmp", _, 0} ->
           put_elem(line, 0, "nop")
 
@@ -27,6 +27,7 @@ defmodule AdventOfCode.Day8.Part2 do
 
   def eval(program, step, acc, executed) do
     IO.inspect(executed, label: "executed")
+
     if step in executed do
       acc
     else

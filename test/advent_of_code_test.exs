@@ -17,13 +17,16 @@ defmodule AdventOfCodeTest do
   test "day 3, part 1 & 2" do
     assert AdventOfCode.Day3.Part1.run("./input/day_03.txt", {3, 1}) == 153
 
-    assert AdventOfCode.Day3.Part2.run("./input/day_03.txt", [
-             {3, 1},
-             {1, 1},
-             {5, 1},
-             {7, 1},
-             {1, 2}
-           ]) == 2_421_944_712
+    assert AdventOfCode.Day3.Part2.run(
+             "./input/day_03.txt",
+             [
+               {3, 1},
+               {1, 1},
+               {5, 1},
+               {7, 1},
+               {1, 2}
+             ]
+           ) == 2_421_944_712
   end
 
   describe "day 4, part 1" do
@@ -144,8 +147,18 @@ defmodule AdventOfCodeTest do
     end
 
     test "part 2" do
-      assert AdventOfCode.Day8.Part2.run("./input/day_08_test.txt") == 8
-      #      assert AdventOfCode.Day8.Part2.run("./input/day_08.txt") == 8
+      # assert AdventOfCode.Day8.Part2.run("./input/day_08_test.txt") == 8
+      # assert AdventOfCode.Day8.Part2.run("./input/day_08.txt") == 8
+    end
+  end
+
+  describe "day 9" do
+    test "part 1" do
+      assert AdventOfCode.Day9.Part1.run("./input/day_09_test.txt", 5) == 127
+#      assert AdventOfCode.Day9.Part1.run("./input/day_09.txt", 25) == 127
+    end
+
+    test "part 2" do
     end
   end
 end
