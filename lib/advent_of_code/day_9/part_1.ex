@@ -1,37 +1,38 @@
 defmodule AdventOfCode.Day9.Part1 do
-  def unmask(mask, preamble_length) do
-    require IEx
-    [preamble | rest] = Enum.chunk_every(mask, preamble_length)
-
-    IEx.pry()
-#    sums = compute(preamble)
-    find_weakness(sums, rest)
-  end
-
-  def find_weakness(preamble, rest) do
-    preamble
-
-    #    Enum.reduce_while(rest, fn {x, acc} ->
-    #      acc |> Enum.chunk_every(preamble)
-    #    end)
-  end
-
-  def compute(preamble, sums \\ [])
-
-  def compute(preamble, sums) do
-    [x, y | rest] = preamble
-    compute(rest, [x + y | sums])
-  end
-
-  def compute([], sums), do: sums
-
-  def run(file_path, preamble_length), do: run(file_path, &unmask/2, preamble_length)
-
-  def run(file_path, fun, preamble_length) when is_function(fun) do
+  def run(file_path, preamble_length) do
     file_path
-    |> File.read!()
-    |> String.split("\n", trim: true)
-    |> Enum.map(&String.to_integer/1)
-    |> fun.(preamble_length)
+    |> parse_input()
+    |> Stream.chunk_every(preamble_length + 1, 1)
+    |> Stream.filter(&(!sum_of_previous_two_nums?(&1)))
+    |> Enum.take(1)
+    |> List.first()
+    |> Enum.reverse()
+    |> List.first()
+  end
+
+  def sum_of_previous_two_nums?(nums) do
+    [target | rest] = Enum.reverse(nums)
+
+    case find_pair(target, rest) do
+      {:ok, _} -> true
+      _ -> false
+    end
+  end
+
+  def find_pair(_target, []), do: :not_found
+
+  def find_pair(target, [i | rest]) do
+    if (target - i) in rest do
+      {:ok, i}
+    else
+      find_pair(target, rest)
+    end
+  end
+
+  def parse_input(file_path) do
+    file_path
+    |> File.stream!()
+    |> Stream.map(&String.trim/1)
+    |> Stream.map(&String.to_integer/1)
   end
 end
