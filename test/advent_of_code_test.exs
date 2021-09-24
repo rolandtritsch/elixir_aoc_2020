@@ -154,6 +154,7 @@ defmodule AdventOfCodeTest do
     test "part 1" do
       assert AdventOfCode.Day9.Part1.run("./input/day_09_test.txt", 5) == 127
       assert AdventOfCode.Day9.Part1.run("./input/day_09.txt", 25) == 22_477_624
+      assert AdventOfCode.Day9.Part1.run("./input/day_09b.txt", 25) == 85_848_519
     end
 
     test "part 2" do
