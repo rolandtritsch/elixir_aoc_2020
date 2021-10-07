@@ -1,10 +1,13 @@
 defmodule AdventOfCode.Day11.Part1 do
-  def run(file_path), do: run(file_path, 98, 95)
-
   def run(file_path, rows, cols) do
     file_path
     |> parse_input(rows, cols)
+    |> tick_until_stable(rows, cols)
+    |> Map.values()
+    |> Enum.count(&occupied?/1)
   end
+
+  def run(file_path), do: run(file_path, 95, 98)
 
   def parse_input(file_path, rows, cols) do
     grid =
@@ -13,35 +16,44 @@ defmodule AdventOfCode.Day11.Part1 do
       |> Stream.map(&String.trim/1)
       |> Enum.map(&String.graphemes/1)
 
-    for row <- 0..(rows - 1), col <- 0..(cols - 1), into: %{} do
-      {{row, col}, Enum.at(grid, row) |> Enum.at(col)}
+    for row <- 1..rows, col <- 1..cols, into: %{} do
+      {{col, row}, Enum.at(grid, row - 1) |> Enum.at(col - 1)}
     end
   end
 
-  def tick_until_stable(grid, cols, rows) do
+  def tick_until_stable(grid, rows, cols) do
     case tick(grid, rows, cols) do
       state when state == grid -> state
-      new_state -> tick_until_stable(new_state, cols, rows)
+      new_state -> tick_until_stable(new_state, rows, cols)
     end
   end
 
   def tick(grid, rows, cols) do
-    for row <- 0..(rows - 1), col <- 0..(cols - 1), into: %{} do
-      current_state = Map.get(grid, {row, col})
-      {{row, col}, next_state({row, col}, current_state, grid)}
+    for row <- 1..rows, col <- 1..cols, into: %{} do
+      current_state = Map.get(grid, {col, row})
+      {{col, row}, next_state({col, row}, current_state, grid)}
     end
   end
 
-  def next_state({col, row} = cursor, "L", grid) do
-    require IEx
-    adjacent_seats(cursor)
-    IEx.pry()
+  def next_state(cursor, "L", grid) do
+    case Enum.all?(seat_values(cursor, grid), &(!occupied?(&1))) do
+      true -> "#"
+      _ -> "L"
+    end
   end
 
-  def next_state({col, row}, "#", grid) do
+  def next_state(cursor, "#", grid) do
+    case 4 <= Enum.count(seat_values(cursor, grid), &occupied?/1) do
+      true -> "L"
+      _ -> "#"
+    end
   end
 
   def next_state(_, current_state, _), do: current_state
+
+  def seat_values(cursor, grid) do
+    Enum.map(adjacent_seats(cursor), &Map.get(grid, &1))
+  end
 
   def occupied?(seat), do: seat == "#"
 
@@ -51,7 +63,8 @@ defmodule AdventOfCode.Day11.Part1 do
       {col, row - 1},
       {col + 1, row - 1},
       {col - 1, row},
-      {col + 1, row + 1},
+      {col + 1, row},
+      {col - 1, row + 1},
       {col, row + 1},
       {col + 1, row + 1}
     ]
