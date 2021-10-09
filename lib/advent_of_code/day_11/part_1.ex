@@ -1,34 +1,37 @@
 defmodule AdventOfCode.Day11.Part1 do
-  def run(file_path, rows, cols) do
+  def run(file_path) do
     file_path
-    |> parse_input(rows, cols)
-    |> tick_until_stable(rows, cols)
+    |> parse_input()
+    |> tick_until_stable()
     |> Map.values()
     |> Enum.count(&occupied?/1)
   end
 
-  def run(file_path), do: run(file_path, 95, 98)
-
-  def parse_input(file_path, rows, cols) do
+  def parse_input(file_path) do
     grid =
       file_path
       |> File.stream!()
       |> Stream.map(&String.trim/1)
       |> Enum.map(&String.graphemes/1)
 
-    for row <- 1..rows, col <- 1..cols, into: %{} do
+    dimensions = {length(grid), length(Enum.at(grid, 0))}
+    {rows, cols} = dimensions
+
+    gridMap = for row <- 1..rows, col <- 1..cols, into: %{} do
       {{col, row}, Enum.at(grid, row - 1) |> Enum.at(col - 1)}
     end
+
+    {gridMap, dimensions}
   end
 
-  def tick_until_stable(grid, rows, cols) do
-    case tick(grid, rows, cols) do
+  def tick_until_stable({grid, dimensions}) do
+    case tick({grid, dimensions}) do
       state when state == grid -> state
-      new_state -> tick_until_stable(new_state, rows, cols)
+      new_state -> tick_until_stable({new_state, dimensions})
     end
   end
 
-  def tick(grid, rows, cols) do
+  def tick({grid, {rows, cols}}) do
     for row <- 1..rows, col <- 1..cols, into: %{} do
       current_state = Map.get(grid, {col, row})
       {{col, row}, next_state({col, row}, current_state, grid)}
