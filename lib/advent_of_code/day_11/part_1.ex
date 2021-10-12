@@ -17,9 +17,10 @@ defmodule AdventOfCode.Day11.Part1 do
     dimensions = {length(grid), length(Enum.at(grid, 0))}
     {rows, cols} = dimensions
 
-    gridMap = for row <- 1..rows, col <- 1..cols, into: %{} do
-      {{col, row}, Enum.at(grid, row - 1) |> Enum.at(col - 1)}
-    end
+    gridMap =
+      for row <- 1..rows, col <- 1..cols, into: %{} do
+        {{col, row}, Enum.at(grid, row - 1) |> Enum.at(col - 1)}
+      end
 
     {gridMap, dimensions}
   end
