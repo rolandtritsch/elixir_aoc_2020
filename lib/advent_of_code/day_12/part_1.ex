@@ -21,30 +21,35 @@ defmodule AdventOfCode.Day12.Part1 do
   def parse_action("R" <> value) when is_binary(value), do: {"R", String.to_integer(value)}
   def parse_action("F" <> value) when is_binary(value), do: {"F", String.to_integer(value)}
 
+  defguard mirror1(action) when action in ["L", "R"]
+  defguard mirror2(action, degree) when (action == "L" and degree == 90) or (action == "R" and degree == 270) 
+  defguard mirror3(action, degree) when (action == "R" and degree == 90) or (action == "L" and degree == 270) 
+
   def move({"N", value}, {x, y, direction}), do: {x, y + value, direction}
   def move({"S", value}, {x, y, direction}), do: {x, y - value, direction}
   def move({"W", value}, {x, y, direction}), do: {x - value, y, direction}
   def move({"E", value}, {x, y, direction}), do: {x + value, y, direction}
 
-  def move({"F", value}, {x, y, direction}), do: move({direction, value}, {x, y, direction})
+  def move({"F", value}, {x, y, "N"}), do: {x, y + value, "N"}
+  def move({"F", value}, {x, y, "E"}), do: {x + value, y, "E"}
+  def move({"F", value}, {x, y, "S"}), do: {x, y - value, "S"}
+  def move({"F", value}, {x, y, "W"}), do: {x - value, y, "W"}
 
-  # inspiration for this direction algorithm
-  # https://github.com/anamba/adventofcode2020/blob/main/lib/day12/part1.ex
-  @directions ["N", "E", "S", "W"]
-  def move({"L", value}, {x, y, direction}) do
-    delta = div(value, 90)
-    direction_index = Enum.find_index(@directions, &(&1 == direction))
-    new_direction = Enum.at(@directions, rem(direction_index - delta, 4))
-    {x, y, new_direction}
-  end
+  def move({action, 180}, {x, y, "N"}) when mirror1(action), do: {x, y, "S"}
+  def move({action, 180}, {x, y, "E"}) when mirror1(action), do: {x, y, "W"}
+  def move({action, 180}, {x, y, "S"}) when mirror1(action), do: {x, y, "N"}
+  def move({action, 180}, {x, y, "W"}) when mirror1(action), do: {x, y, "E"}
 
-  def move({"R", value}, {x, y, direction}) do
-    delta = div(value, 90)
-    direction_index = Enum.find_index(@directions, &(&1 == direction))
-    new_direction = Enum.at(@directions, rem(direction_index + delta, 4))
-    {x, y, new_direction}
-  end
+  def move({action, degree}, {x, y, "N"}) when mirror2(action, degree), do: {x, y, "W"}
+  def move({action, degree}, {x, y, "E"}) when mirror2(action, degree), do: {x, y, "N"}
+  def move({action, degree}, {x, y, "S"}) when mirror2(action, degree), do: {x, y, "E"}
+  def move({action, degree}, {x, y, "W"}) when mirror2(action, degree), do: {x, y, "S"}
 
+  def move({action, degree}, {x, y, "N"}) when mirror3(action, degree), do: {x, y, "E"}
+  def move({action, degree}, {x, y, "E"}) when mirror3(action, degree), do: {x, y, "S"}
+  def move({action, degree}, {x, y, "S"}) when mirror3(action, degree), do: {x, y, "W"}
+  def move({action, degree}, {x, y, "W"}) when mirror3(action, degree), do: {x, y, "N"}
+  
   # 𝑥=(𝑎,𝑏) 𝑦=(𝑐,𝑑) -> |𝑎−𝑐|+|𝑏−𝑑|
   def manhattan_distance({x1, y1, _}, {x2, y2}) do
     abs(x2 - x1) + abs(y2 - y1)
