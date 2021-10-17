@@ -5,12 +5,12 @@ defmodule AdventOfCode.Day12.Part1 do
   end
 
   def parse_input(file_path) do
-      file_path
-      |> File.stream!()
-      |> Stream.map(&String.trim/1)
-      |> Enum.map(&parse_action/1)
-      |> Enum.reduce({0, 0, "E"}, &move/2)
-      |> manhattan_distance({0, 0})
+    file_path
+    |> File.stream!()
+    |> Stream.map(&String.trim/1)
+    |> Enum.map(&parse_action/1)
+    |> Enum.reduce({0, 0, "E"}, &move/2)
+    |> manhattan_distance({0, 0})
   end
 
   def parse_action("N" <> value) when is_binary(value), do: {"N", String.to_integer(value)}
