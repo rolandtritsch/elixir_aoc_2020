@@ -25,7 +25,6 @@ defmodule AdventOfCode.Day13.Part1 do
     time * bus
   end
 
-
   @doc """
    remainder = rem (arrival time) (bus number)
    {wait_time, bus number} = (bus number) - remainder
