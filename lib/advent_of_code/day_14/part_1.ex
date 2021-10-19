@@ -3,7 +3,9 @@ defmodule AdventOfCode.Day14.Part1 do
     file_path
     |> parse_input()
     |> evaluate()
-    |> IO.inspect()
+    |> elem(0)
+    |> Map.values()
+    |> Enum.sum()
   end
 
   def evaluate(instructions) do
@@ -19,7 +21,17 @@ defmodule AdventOfCode.Day14.Part1 do
   end
 
   def apply_mask(mask, value) do
-    value
+    binary = Integer.digits(value, 2) |> Enum.reverse()
+
+    for {binary_mask, i} <- Enum.with_index(mask) do
+      case binary_mask do
+        "1" -> 1
+        "0" -> 0
+        "X" -> Enum.at(binary, i) || 0
+      end
+    end
+    |> Enum.reverse()
+    |> Integer.undigits(2)
   end
 
   def parse_input(file_path) do
