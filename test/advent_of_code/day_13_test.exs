@@ -5,6 +5,7 @@ defmodule AdventOfCodeTest.Day13Test do
     test "part 1" do
       assert AdventOfCode.Day13.Part1.run("./input/day_13_test.txt") == 295
       assert AdventOfCode.Day13.Part1.run("./input/day_13.txt") == 2935
+      assert AdventOfCode.Day13.Part1.run("./input/day_13b.txt") == 2305
     end
 
     test "part 2" do
