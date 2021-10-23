@@ -22,12 +22,8 @@ defmodule AdventOfCode.Day12.Part1 do
   def parse_action("F" <> value) when is_binary(value), do: {"F", String.to_integer(value)}
 
   defguard mirror1(action) when action in ["L", "R"]
-
-  defguard mirror2(action, degree)
-           when (action == "L" and degree == 90) or (action == "R" and degree == 270)
-
-  defguard mirror3(action, degree)
-           when (action == "R" and degree == 90) or (action == "L" and degree == 270)
+  defguard mirror2(action, degree) when (action == "L" and degree == 90) or (action == "R" and degree == 270) 
+  defguard mirror3(action, degree) when (action == "R" and degree == 90) or (action == "L" and degree == 270) 
 
   def move({"N", value}, {x, y, direction}), do: {x, y + value, direction}
   def move({"S", value}, {x, y, direction}), do: {x, y - value, direction}
@@ -53,7 +49,7 @@ defmodule AdventOfCode.Day12.Part1 do
   def move({action, degree}, {x, y, "E"}) when mirror3(action, degree), do: {x, y, "S"}
   def move({action, degree}, {x, y, "S"}) when mirror3(action, degree), do: {x, y, "W"}
   def move({action, degree}, {x, y, "W"}) when mirror3(action, degree), do: {x, y, "N"}
-
+  
   # 𝑥=(𝑎,𝑏) 𝑦=(𝑐,𝑑) -> |𝑎−𝑐|+|𝑏−𝑑|
   def manhattan_distance({x1, y1, _}, {x2, y2}) do
     abs(x2 - x1) + abs(y2 - y1)
