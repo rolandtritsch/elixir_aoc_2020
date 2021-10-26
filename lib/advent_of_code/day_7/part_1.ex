@@ -1,5 +1,5 @@
 defmodule AdventOfCode.Day7.Part1 do
-  # credit: https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part1.ex
+  # inspired by https://github.com/anamba/adventofcode2020/blob/main/lib/day7/part1.ex
 
   def count_bags_that_contain_color(rules, target) do
     rules
@@ -45,7 +45,7 @@ defmodule AdventOfCode.Day7.Part1 do
     %{"color" => color, "quantity" => quantity} =
       Regex.named_captures(~r/^(?<quantity>\d+) (?<color>\w+ \w+) bag(s?)(\.?)$/, contents)
 
-    {color, quantity}
+    {color, String.to_integer(quantity)}
   end
 
   def run(file_path, bag_color) do
